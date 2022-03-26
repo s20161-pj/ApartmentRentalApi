@@ -1,6 +1,6 @@
 ﻿namespace ApartmentRental.Core.Entities;
 
-public class Tenant
+public class Tenant:BaseEntity
 {
-    
+    public Apartment Apartment { get; set; }
 }
