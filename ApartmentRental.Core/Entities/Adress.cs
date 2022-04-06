@@ -1,6 +1,6 @@
 ﻿namespace ApartmentRental.Core.Entities;
 
-public class Adress : BaseEntity
+public class Address : BaseEntity
 {
     public string Street { get; set; }
     public string? AparmentNumber { get; set; }
