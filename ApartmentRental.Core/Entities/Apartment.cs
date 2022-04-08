@@ -13,7 +13,7 @@ public class Apartment : BaseEntity
     public Landlord Landlord { get; set; }
     public int TenantId { get; set; }
     public int AddressId { get; set; }
-    public Address Adress { get; set; }
+    public Address Address { get; set; }
     public IEnumerable<Image> Images { get; set; }
 
 }
