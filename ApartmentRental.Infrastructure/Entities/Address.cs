@@ -1,4 +1,6 @@
-﻿namespace ApartmentRental.Core.Entities;
+﻿
+
+namespace ApartmentRental.Infrastructure;
 
 public class Address : BaseEntity
 {

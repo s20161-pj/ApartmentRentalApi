@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ApartmentRental.Core.Entities;
+﻿namespace ApartmentRental.Infrastructure;
 
 public class Apartment : BaseEntity
 {
@@ -15,5 +13,4 @@ public class Apartment : BaseEntity
     public int AddressId { get; set; }
     public Address Address { get; set; }
     public IEnumerable<Image> Images { get; set; }
-
 }

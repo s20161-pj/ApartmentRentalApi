@@ -1,4 +1,4 @@
-﻿using ApartmentRental.Core.Entities;
+﻿
 using Microsoft.EntityFrameworkCore;
 
 namespace ApartmentRental.Infrastructure.Context

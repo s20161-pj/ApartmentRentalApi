@@ -1,5 +1,4 @@
-﻿namespace ApartmentRental.Core.Entities;
-
+﻿namespace ApartmentRental.Infrastructure;
 public class Tenant : BaseEntity
 {
     public Apartment Apartment { get; set; }

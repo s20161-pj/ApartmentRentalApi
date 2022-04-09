@@ -1,5 +1,4 @@
-﻿namespace ApartmentRental.Core.Entities;
-
+﻿namespace ApartmentRental.Infrastructure;
 public class Account : BaseEntity
 {
     public string FirstName { get; set; }
