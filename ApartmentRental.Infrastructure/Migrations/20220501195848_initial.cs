@@ -35,10 +35,10 @@ namespace ApartmentRental.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
-                    LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
                     IsAccountActive = table.Column<bool>(type: "INTEGER", nullable: false),
                     AddressId = table.Column<int>(type: "INTEGER", nullable: false),
                     DateOfCreation = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -103,11 +103,11 @@ namespace ApartmentRental.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RentalAmount = table.Column<decimal>(type: "TEXT", nullable: false),
+                    RentAmount = table.Column<decimal>(type: "TEXT", nullable: false),
                     NumberOfRooms = table.Column<int>(type: "INTEGER", nullable: false),
                     SquareMeters = table.Column<int>(type: "INTEGER", nullable: false),
                     Floor = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsElement = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsElevator = table.Column<bool>(type: "INTEGER", nullable: false),
                     LandlordId = table.Column<int>(type: "INTEGER", nullable: false),
                     TenantId = table.Column<int>(type: "INTEGER", nullable: false),
                     AddressId = table.Column<int>(type: "INTEGER", nullable: false),

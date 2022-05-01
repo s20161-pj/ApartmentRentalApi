@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApartmentRental.Infrastructure.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20220404174141_initial")]
+    [Migration("20220501195848_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace ApartmentRental.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Account", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,18 +35,22 @@ namespace ApartmentRental.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsAccountActive")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -56,7 +60,7 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.ToTable("Account");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Address", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -95,7 +99,7 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Apartment", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Apartment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -113,7 +117,7 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.Property<int>("Floor")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsElement")
+                    b.Property<bool>("IsElevator")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("LandlordId")
@@ -122,7 +126,7 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.Property<int>("NumberOfRooms")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("RentalAmount")
+                    b.Property<decimal>("RentAmount")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("SquareMeters")
@@ -143,7 +147,7 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.ToTable("Apartment");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Image", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -169,7 +173,7 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.ToTable("Image");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Landlord", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Landlord", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -191,7 +195,7 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.ToTable("Landlord");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Tenant", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Tenant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -213,9 +217,9 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.ToTable("Tenant");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Account", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Account", b =>
                 {
-                    b.HasOne("ApartmentRental.Core.Entities.Address", "Address")
+                    b.HasOne("ApartmentRental.Infrastructure.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -224,34 +228,34 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Apartment", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Apartment", b =>
                 {
-                    b.HasOne("ApartmentRental.Core.Entities.Address", "Adress")
+                    b.HasOne("ApartmentRental.Infrastructure.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApartmentRental.Core.Entities.Landlord", "Landlord")
+                    b.HasOne("ApartmentRental.Infrastructure.Landlord", "Landlord")
                         .WithMany("Apartments")
                         .HasForeignKey("LandlordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApartmentRental.Core.Entities.Tenant", null)
+                    b.HasOne("ApartmentRental.Infrastructure.Tenant", null)
                         .WithOne("Apartment")
-                        .HasForeignKey("ApartmentRental.Core.Entities.Apartment", "TenantId")
+                        .HasForeignKey("ApartmentRental.Infrastructure.Apartment", "TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Adress");
+                    b.Navigation("Address");
 
                     b.Navigation("Landlord");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Image", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Image", b =>
                 {
-                    b.HasOne("ApartmentRental.Core.Entities.Apartment", "Apartment")
+                    b.HasOne("ApartmentRental.Infrastructure.Apartment", "Apartment")
                         .WithMany("Images")
                         .HasForeignKey("ApartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -260,9 +264,9 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.Navigation("Apartment");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Landlord", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Landlord", b =>
                 {
-                    b.HasOne("ApartmentRental.Core.Entities.Account", "Account")
+                    b.HasOne("ApartmentRental.Infrastructure.Account", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -271,9 +275,9 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.Navigation("Account");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Tenant", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Tenant", b =>
                 {
-                    b.HasOne("ApartmentRental.Core.Entities.Account", "Account")
+                    b.HasOne("ApartmentRental.Infrastructure.Account", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -282,17 +286,17 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.Navigation("Account");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Apartment", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Apartment", b =>
                 {
                     b.Navigation("Images");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Landlord", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Landlord", b =>
                 {
                     b.Navigation("Apartments");
                 });
 
-            modelBuilder.Entity("ApartmentRental.Core.Entities.Tenant", b =>
+            modelBuilder.Entity("ApartmentRental.Infrastructure.Tenant", b =>
                 {
                     b.Navigation("Apartment")
                         .IsRequired();
