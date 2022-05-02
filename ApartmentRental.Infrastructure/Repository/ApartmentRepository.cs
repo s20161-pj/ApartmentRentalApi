@@ -40,6 +40,8 @@ public class ApartmentRepository : IApartmentRepository
         x.Address.City == entity.Address.City
         && x.Address.Street == entity.Address.Street
         && x.Address.BuildingNumber == entity.Address.BuildingNumber
+        && x.Address.ZipCode == entity.Address.ZipCode
+        && x.Address.Country == entity.Address.Country
         && x.Address.AparmentNumber == entity.Address.AparmentNumber);
 
         if (isExist)
@@ -68,7 +70,7 @@ public class ApartmentRepository : IApartmentRepository
         await _mainContext.SaveChangesAsync();
     }
 
-    public async Task DeletedByIdAsync(int id)
+    public async Task DeleteByIdAsync(int id)
     {
         var apartmentToDelete = await _mainContext.Apartment.SingleOrDefaultAsync(x => x.Id == id);
         if (apartmentToDelete != null)
@@ -78,5 +80,4 @@ public class ApartmentRepository : IApartmentRepository
         }
         throw new EntityNotFoundException();
     }
-
 }

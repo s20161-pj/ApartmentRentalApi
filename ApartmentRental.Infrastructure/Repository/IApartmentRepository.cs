@@ -1,5 +1,5 @@
 ﻿namespace ApartmentRental.Infrastructure.Repository;
 
-public interface IApartmentRepository: IRepository<Apartment>
+public interface IApartmentRepository : IRepository<Apartment>
 {
 }
