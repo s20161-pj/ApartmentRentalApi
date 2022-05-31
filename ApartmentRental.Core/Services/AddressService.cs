@@ -11,18 +11,18 @@
             _addressRepository = addressRepository;
         }
 
-        public async Task<int> GetAddressIdOrCreateAsync(string city, string zipCode, string street, string country,
+        public async Task<Address> GetAddressOrCreateAsync(string city, string zipCode, string street, string country,
             string buildingNumber,
             string apartmentNumber)
         {
-            var id = await _addressRepository.GetAddressIdByItsAttributesAsync(country, city, zipCode, street,
+            var address = await _addressRepository.GetAddressByItsAttributesAsync(country, city, zipCode, street,
                buildingNumber,
                apartmentNumber);
-            if (id != 0)
+            if (address != null)
             {
-                return id;
+                return address;
             }
-            var address = await _addressRepository.CreateAndGetAsync(new Address
+            var newAdress = await _addressRepository.CreateAndGetAsync(new Address
             {
                 Country = country,
                 City = city,
@@ -31,7 +31,7 @@
                 BuildingNumber = buildingNumber,
                 AparmentNumber = apartmentNumber
             });
-            return address.Id;
+            return newAdress;
         }
     }
 }

@@ -21,14 +21,17 @@ namespace ApartmentRental.API.Services
         public async Task AddNewApartmentToExistingLandLordAsync(ApartmentCreationRequestDto dto)
         {
             var landlord = await _landlordRepository.GetByIdAsync(dto.LandLordId);
-            var addressId = await _addressService.GetAddressIdOrCreateAsync(dto.Country,
+            var address = await _addressService.GetAddressOrCreateAsync(dto.Country,
                 dto.City, dto.ZipCode, dto.Street,
                 dto.BuildingNumber, dto.ApartmentNumber);
+
             await _apartmentRepository.AddAsync(new Apartment
             {
-                AddressId = addressId,
+                Address = address,
+                AddressId = (int)address.Id,
                 Floor = dto.Floor,
-                LandlordId = landlord.Id,
+                LandlordId = (int)landlord.Id,
+                Landlord = landlord,
                 IsElevator = dto.isElevator,
                 RentAmount = dto.RentAmount,
                 SquareMeters = dto.SquareMeters,

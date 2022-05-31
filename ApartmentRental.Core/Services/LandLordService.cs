@@ -31,7 +31,7 @@ namespace ApartmentRental.Core.Services
             {
                 Account = new Account
                 {
-                    AddressId = address.Id,
+                    AddressId = (int)address.Id,
                     FirstName = dto.Name,
                     Email = dto.Email,
                     IsAccountActive = true,

@@ -32,7 +32,7 @@ namespace ApartmentRental.Infrastructure.Repository
                 throw new Exception("Podany adres już istnieje");
             }
             entity.DateOfCreation = DateTime.UtcNow;
-            await _mainContext.AddAsync(entity);
+            await _mainContext.Address.AddAsync(entity);
             await _mainContext.SaveChangesAsync();
         }
 
@@ -91,7 +91,7 @@ namespace ApartmentRental.Infrastructure.Repository
             await _mainContext.SaveChangesAsync();
         }
 
-        public async Task<int> GetAddressIdByItsAttributesAsync(string country, string city, string zipCode, string street,
+        public async Task<Address?> GetAddressByItsAttributesAsync(string country, string city, string zipCode, string street,
              string buildingNumber,
              string apartmentNumber)
 
@@ -99,7 +99,7 @@ namespace ApartmentRental.Infrastructure.Repository
             var address = await _mainContext.Address.FirstOrDefaultAsync(x =>
             x.Country == country && x.City == city && x.ZipCode == zipCode && x.Street == street &&
             x.BuildingNumber == buildingNumber && x.AparmentNumber == apartmentNumber);
-            return address?.Id ?? 0;
+            return address;
         }
 
         public async Task<Address?> FindAndGetAsync(Address entity)

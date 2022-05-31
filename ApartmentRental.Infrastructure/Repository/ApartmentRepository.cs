@@ -50,7 +50,8 @@ public class ApartmentRepository : IApartmentRepository
         }
 
         entity.DateOfCreation = DateTime.UtcNow;
-        await _mainContext.AddAsync(entity);
+        entity.DateOfUpdate = DateTime.UtcNow;
+        _mainContext.Apartment.Add(entity);
         await _mainContext.SaveChangesAsync();
     }
 

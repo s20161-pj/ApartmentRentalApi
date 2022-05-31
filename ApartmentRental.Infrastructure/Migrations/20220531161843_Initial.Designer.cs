@@ -3,6 +3,7 @@ using System;
 using ApartmentRental.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApartmentRental.Infrastructure.Migrations
 {
     [DbContext(typeof(MainContext))]
-    partial class MainContextModelSnapshot : ModelSnapshot
+    [Migration("20220531161843_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
@@ -130,7 +132,7 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.Property<int>("SquareMeters")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("TenantId")
+                    b.Property<int>("TenantId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -240,15 +242,15 @@ namespace ApartmentRental.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApartmentRental.Infrastructure.Tenant", "Tenant")
+                    b.HasOne("ApartmentRental.Infrastructure.Tenant", null)
                         .WithOne("Apartment")
-                        .HasForeignKey("ApartmentRental.Infrastructure.Apartment", "TenantId");
+                        .HasForeignKey("ApartmentRental.Infrastructure.Apartment", "TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Address");
 
                     b.Navigation("Landlord");
-
-                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("ApartmentRental.Infrastructure.Image", b =>

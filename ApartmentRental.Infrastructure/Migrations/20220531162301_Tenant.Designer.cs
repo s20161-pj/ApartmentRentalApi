@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApartmentRental.Infrastructure.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20220501195848_initial")]
-    partial class initial
+    [Migration("20220531162301_Tenant")]
+    partial class Tenant
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace ApartmentRental.Infrastructure.Migrations
 
             modelBuilder.Entity("ApartmentRental.Infrastructure.Account", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -62,7 +62,7 @@ namespace ApartmentRental.Infrastructure.Migrations
 
             modelBuilder.Entity("ApartmentRental.Infrastructure.Address", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -101,7 +101,7 @@ namespace ApartmentRental.Infrastructure.Migrations
 
             modelBuilder.Entity("ApartmentRental.Infrastructure.Apartment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -132,7 +132,7 @@ namespace ApartmentRental.Infrastructure.Migrations
                     b.Property<int>("SquareMeters")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TenantId")
+                    b.Property<int?>("TenantId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -149,7 +149,7 @@ namespace ApartmentRental.Infrastructure.Migrations
 
             modelBuilder.Entity("ApartmentRental.Infrastructure.Image", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -175,7 +175,7 @@ namespace ApartmentRental.Infrastructure.Migrations
 
             modelBuilder.Entity("ApartmentRental.Infrastructure.Landlord", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -197,7 +197,7 @@ namespace ApartmentRental.Infrastructure.Migrations
 
             modelBuilder.Entity("ApartmentRental.Infrastructure.Tenant", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -242,15 +242,15 @@ namespace ApartmentRental.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApartmentRental.Infrastructure.Tenant", null)
+                    b.HasOne("ApartmentRental.Infrastructure.Tenant", "Tenant")
                         .WithOne("Apartment")
-                        .HasForeignKey("ApartmentRental.Infrastructure.Apartment", "TenantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApartmentRental.Infrastructure.Apartment", "TenantId");
 
                     b.Navigation("Address");
 
                     b.Navigation("Landlord");
+
+                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("ApartmentRental.Infrastructure.Image", b =>

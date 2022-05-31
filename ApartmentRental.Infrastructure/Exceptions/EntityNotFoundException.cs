@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApartmentRental.Infrastructure.Exceptions
 {
-    internal class EntityNotFoundException:Exception
+    public class EntityNotFoundException:Exception
     {
     }
 }
