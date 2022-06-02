@@ -10,6 +10,12 @@ namespace ApartmentRental.API.Services
         private readonly IApartmentRepository _apartmentRepository;
         private readonly ILandlordRepository _landlordRepository;
         private readonly IAddressService _addressService;
+        private object of;
+
+        public ApartmentService(object of)
+        {
+            this.of = of;
+        }
 
         public ApartmentService(IApartmentRepository apartmentRepository, ILandlordRepository landlordRepository, IAddressService addressService)
         {

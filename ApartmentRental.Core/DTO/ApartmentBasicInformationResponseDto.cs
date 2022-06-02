@@ -23,6 +23,5 @@ namespace ApartmentRental.Core.DTO
             City = city;
             Street = street;
         }
-
     }
 }
