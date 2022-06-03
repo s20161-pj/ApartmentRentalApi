@@ -19,6 +19,7 @@ namespace ApartmentRental.Tests
             var result = await sut.GetTheCheapestApartmentAsync();
             result.Should().BeNull();
         }
+
         [Fact]
         public async Task GetTheCheapestApartmentAsync_ShouldReturnTheCheapestApartment()
         {
@@ -73,5 +74,53 @@ namespace ApartmentRental.Tests
             result.IsElevatorInBuilding.Should().BeFalse();
 
         }
+
+        [Fact]
+        public async Task GetAllApartmensBasicInfosAsync_ShouldReturnCollectionOfApartments()
+        {
+            var apartments = new List<Apartment>
+            {
+                new()
+                {
+                    Address=new Address()
+                    {
+                        City="Gdañsk",
+                        Country="Poland",
+                        Street="Grunwaldzka",
+                        AparmentNumber="1",
+                        BuildingNumber="2",
+                        ZipCode="80-000",
+                    },
+                    Floor=1,
+                    RentAmount=2000,
+                    SquareMeters=45,
+                    NumberOfRooms=3,
+                    IsElevator=true,
+                },
+                new()
+                {
+                    Address=new Address()
+                    {
+                        City ="Gdynia",
+                        Country ="Poland",
+                        Street ="Wielkopolska",
+                        AparmentNumber="2",
+                        BuildingNumber ="1",
+                        ZipCode ="80-001"
+                    },
+                    Floor=2,
+                    RentAmount=1999,
+                    SquareMeters=40,
+                    NumberOfRooms=2,
+                }
+            };
+            var apartmentRepositoryMock = new Moq.Mock<IApartmentRepository>();
+            apartmentRepositoryMock.Setup(x => x.GetAllAsync()).ReturnsAsync(apartments);
+            var sut = new ApartmentService(apartmentRepositoryMock.Object, Mock.Of<ILandlordRepository>(), Mock.Of<IAddressService>());
+            var result = await sut.GetAllApartmensBasicInfosAsync();
+            result.Should().NotBeNull();
+            result.Should().HaveCount(apartments.Count);
+        }
+
     }
 }
